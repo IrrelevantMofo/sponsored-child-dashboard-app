@@ -28,6 +28,8 @@ export const { actions: siteActions, reducer: siteReducer } = createSlice({
   
       clearChildData(state,) {
           state.data = null;
+          state.errorMessage = null;
+          state.requestStatus = 'NONE';
       },
     },
   });

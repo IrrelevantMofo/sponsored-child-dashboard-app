@@ -13,3 +13,9 @@ export function* fetchChildSaga() {
     }
   }
   export const fetchChildAsync = createSagaAction(fetchChildSaga);
+
+  
+export function* cleanupSaga() {
+    yield put(siteActions.clearChildData());
+  }
+  export const cleanup = createSagaAction(cleanupSaga);

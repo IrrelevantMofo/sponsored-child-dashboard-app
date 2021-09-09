@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchChildAsync } from '../store/sagas/children';
+import { fetchChildAsync,cleanup } from '../store/sagas/children';
 
 
 
@@ -11,8 +11,9 @@ export default function Home() {
   const dispatch = useDispatch();
   
   useEffect(() => { 
+    dispatch(fetchChildAsync())
     return () => {
-      setLoading(false)
+      dispatch(cleanup())
     }
   },[])
 
@@ -20,17 +21,22 @@ export default function Home() {
     switch(requestStatus){
       case 'NONE':
         setLoading(false);
+        break;
       case 'REQUESTING':
         setLoading(true);
+        break;
       case 'SUCCESS':
         setLoading(false);
+        break;
       case 'FAILURE':
         setLoading(false)
+        break;
     }
   },[requestStatus])
 
   return (
     <div className='container'>
+      {console.log(loading)}
       <div className='row mt-3'>
         <div className='col-12-xs text-center'>
           <h1>Sponsored Child Dashboard</h1>

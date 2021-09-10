@@ -31,7 +31,6 @@ export default function Home() {
         setLoading(true);
         break;
       case 'SUCCESS':
-        console.log(data)
         setFilteredData(data.sponsoredChildrenDisplay)
         setLoading(false);
         break;
@@ -39,7 +38,7 @@ export default function Home() {
         setLoading(false)
         break;
     }
-  },[requestStatus])
+  },[requestStatus,data])
 
   useEffect(()=>{
     switch(dataFilter){
@@ -53,7 +52,7 @@ export default function Home() {
         setFilteredData(data.futureSponsoredChildrenDisplay)
         break;
     }
-  },[dataFilter])
+  },[dataFilter, data])
 
   const paginate = (array, page_size, page_number) => {
     return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -61,7 +60,7 @@ export default function Home() {
 
   return (
     <>
-      <div className='row pt-3 pb-2 mb-1' style={{backgroundColor:'#338EEF'}}>
+      <div className='row pt-3 pb-2 mb-3' style={{backgroundColor:'#338EEF'}}>
         <div className='col-12-xs text-center text-white'>
           <h1>Sponsored Child Dashboard</h1>
         </div>
@@ -85,7 +84,7 @@ export default function Home() {
         {!!data && filteredData.length>0? paginate(filteredData, 6, page).map(each=>{
           return (
               <div key={each.childNumber} className='col-12-xs col-6-md col-4-lg'>
-                <Card data={each}/>
+                <Card data={each} />
               </div>
           )
         }) : loading ? <div className='col-12-xs text-center'>

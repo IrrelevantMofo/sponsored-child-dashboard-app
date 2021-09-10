@@ -12,18 +12,26 @@
   @include btn;
 }
 
+
 @each $key, $val in $colors {
   .btn-#{$key} {
     @include btn($val);
     &:hover {
       background-color: lighten($val, 5);
     }
+    &:active {
+      background-color: lighten($val, 5);
+    }
   }
+  
   .btn-outlined-#{$key} {
     @include btn(#fff);
     border: $base-border-thickness solid $val;
     &:hover {
       background-color: $val;
+    }
+    &:active {
+      background-color: lighten($val, 5);
     }
   }
   .btn-complement-#{$key} {
@@ -32,6 +40,9 @@
     &:hover {
       color: $val;
       background-color: light-comp($val);
+    }
+    &:active {
+      background-color: lighten($val, 5);
     }
   }
 }
